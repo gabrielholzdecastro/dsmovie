@@ -19,16 +19,16 @@ public class MovieService {
 	// Page para fazer a pesquisa por pagina
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAll(Pageable pageable) {
-		Page<Movie> result = movieRepository.findAll(pageable);
-		Page<MovieDTO> page = result.map(elementList -> new MovieDTO(elementList));
-		return page;
+		Page<Movie> moviePage = movieRepository.findAll(pageable);
+		Page<MovieDTO> movieDTOPage = moviePage.map(elementList -> new MovieDTO(elementList));
+		return movieDTOPage;
 	}
 	
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
-		Movie result = movieRepository.findById(id).get();
-		MovieDTO dto = new MovieDTO(result);
-		return dto;
+		Movie movie = movieRepository.findById(id).get();
+		MovieDTO movieDTO = new MovieDTO(movie);
+		return movieDTO;
 	}
 	
 }
